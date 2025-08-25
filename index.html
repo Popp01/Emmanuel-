@@ -1,652 +1,524 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uprise Data | Sign Up</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            purple: {
-              350: '#a855f7',
-              450: '#9333ea',
-              550: '#7e22ce',
-              650: '#6b21a8',
-            }
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uprise Data - Customer Reviews</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-      }
-    }
-  </script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
-    }
-    
-    .card {
-      background: white;
-      border-radius: 1.5rem;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      overflow: hidden;
-      width: 100%;
-      max-width: 420px;
-    }
-    
-    .bank-info {
-      background: linear-gradient(to right, #7e22ce, #a855f7);
-      color: white;
-      border-radius: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .bank-info:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px -5px rgba(126, 34, 206, 0.4);
-    }
-    
-    .step-transition {
-      transition: all 0.5s ease;
-    }
-    
-    .copy-btn {
-      transition: all 0.2s ease;
-    }
-    
-    .copy-btn:hover {
-      transform: scale(1.05);
-    }
-    
-    .progress-bar {
-      height: 6px;
-      border-radius: 3px;
-      background-color: #e9d5ff;
-      overflow: hidden;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: linear-gradient(to right, #7e22ce, #a855f7);
-      width: 0%;
-      transition: width 2s linear;
-    }
-    
-    .amount-btn {
-      transition: all 0.2s ease;
-    }
-    
-    .amount-btn:hover {
-      transform: translateY(-2px);
-    }
-    
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 15px 20px;
-      border-radius: 10px;
-      color: white;
-      font-weight: 500;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-    }
-    
-    .notification.show {
-      transform: translateX(0);
-    }
-    
-    .notification.success {
-      background-color: #10b981;
-    }
-    
-    .notification.error {
-      background-color: #ef4444;
-    }
-
-    .switch-form {
-      text-align: center;
-      margin-top: 20px;
-      padding-top: 15px;
-      border-top: 1px solid #e9d5ff;
-    }
-
-    .switch-form a {
-      color: #7e22ce;
-      text-decoration: none;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-    .switch-form a:hover {
-      text-decoration: underline;
-    }
-  </style>
+        
+        :root {
+            --primary: #3a0ca3;
+            --secondary: #4361ee;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #e6e9ff 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid var(--accent);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--warning);
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            box-shadow: 0 4px 10px rgba(114, 9, 183, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: #5a0892;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--success);
+            color: white;
+            box-shadow: 0 4px 10px rgba(76, 201, 240, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2bb8e0;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(to bottom right, white, #f0f4ff);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .welcome-section h1 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+        
+        .welcome-section p {
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(to bottom right, #f8f9fa, white);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        /* Reviews Section Styles */
+        .reviews-section {
+            background: linear-gradient(to bottom right, white, #f0f4ff);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .reviews-section h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .reviews-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .review-card {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid var(--success);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .review-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .reviewer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .reviewer-info h3 {
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .rating {
+            color: var(--warning);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .review-content {
+            color: #666;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        /* Data Metrics Section */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .metric-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer Styles */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--warning);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .welcome-section, .reviews-section {
+                padding: 25px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Notification -->
-  <div id="notification" class="notification hidden">
-    <i class="fas fa-check-circle mr-2"></i>
-    <span id="notification-text"></span>
-  </div>
-
-  <!-- Auth Card -->
-  <div id="auth-card" class="card">
-    <!-- Signup Form (shown first by default) -->
-    <div id="signup-form" class="p-8">
-      <h2 class="text-2xl font-bold text-purple-650 mb-6 text-center">Create Account</h2>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Full Name</label>
-        <input type="text" id="signup-name" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter your full name">
-      </div>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Phone Number</label>
-        <div class="flex">
-          <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-purple-300 bg-purple-100 text-purple-700 text-sm">
-            +234
-          </span>
-          <input type="tel" id="signup-phone" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border-purple-300 border focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="8012345678">
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-database"></i>
+                    <span>Uprise Data</span>
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i> Analytics
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-cog"></i> Settings
+                    </button>
+                </div>
+            </nav>
         </div>
-      </div>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Password</label>
-        <input type="password" id="signup-password" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Create a password">
-      </div>
-      
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Confirm Password</label>
-        <input type="password" id="signup-confirm" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Confirm your password">
-      </div>
-      
-      <button onclick="signup()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
-        Create Account <i class="fas fa-user-plus ml-2"></i>
-      </button>
-
-      <div class="switch-form">
-        <p>Already have an account? <a onclick="showLogin()">Login here</a></p>
-      </div>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="welcome-section">
+                <h1>Uprise Data Platform</h1>
+                <p>Transform your business with powerful data analytics and insights. Our platform helps you make data-driven decisions with ease.</p>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered Insights</h3>
+                        <p>Leverage machine learning to uncover hidden patterns in your data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Real-Time Analytics</h3>
+                        <p>Monitor your data in real-time with our powerful dashboard.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure Data Storage</h3>
+                        <p>Enterprise-grade security for all your sensitive data.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3>Cloud Integration</h3>
+                        <p>Seamlessly connect with all major cloud platforms.</p>
+                    </div>
+                </div>
+                
+                <div class="metrics">
+                    <div class="metric-card">
+                        <div class="metric-value">99.9%</div>
+                        <div class="metric-label">Uptime</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">2.5B+</div>
+                        <div class="metric-label">Data Points</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">500+</div>
+                        <div class="metric-label">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reviews-section">
+                <h2><i class="fas fa-star"></i> Customer Reviews</h2>
+                <div class="reviews-container">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">JD</div>
+                            <div class="reviewer-info">
+                                <h3>John Davis</h3>
+                                <div class="rating">★★★★★</div>
+                                <div>Data Analyst</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>"Uprise Data has transformed how we analyze customer behavior. The insights we've gained have directly increased our conversion rates by 27% in just three months."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">SM</div>
+                            <div class="reviewer-info">
+                                <h3>Sarah Mitchell</h3>
+                                <div class="rating">★★★★☆</div>
+                                <div>IT Director</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>"Implementation was seamless and the support team was incredibly helpful. The only reason I'm not giving 5 stars is that I'd love to see more custom visualization options."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">RJ</div>
+                            <div class="reviewer-info">
+                                <h3>Robert Johnson</h3>
+                                <div class="rating">★★★★★</div>
+                                <div>CEO, TechStart</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>"This platform has been a game-changer for our organization. We've reduced decision-making time by 65% thanks to the real-time analytics and intuitive dashboard."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">EM</div>
+                            <div class="reviewer-info">
+                                <h3>Emily Martinez</h3>
+                                <div class="rating">★★★★★</div>
+                                <div>Marketing Director</div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>"The customer segmentation tools are incredible. We've been able to personalize our marketing campaigns like never before, resulting in a 42% increase in engagement."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <!-- Login Form (hidden initially) -->
-    <div id="login-form" class="p-8 hidden">
-      <h2 class="text-2xl font-bold text-purple-650 mb-6 text-center">Welcome Back</h2>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Phone Number</label>
-        <div class="flex">
-          <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-purple-300 bg-purple-100 text-purple-700 text-sm">
-            +234
-          </span>
-          <input type="tel" id="login-phone" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border-purple-300 border focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="8012345678">
-        </div>
-      </div>
-      
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Password</label>
-        <input type="password" id="login-password" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter your password">
-      </div>
-      
-      <button onclick="login()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
-        Login <i class="fas fa-sign-in-alt ml-2"></i>
-      </button>
-
-      <div class="switch-form">
-        <p>Don't have an account? <a onclick="showSignup()">Sign up here</a></p>
-      </div>
+    <div class="container">
+        <footer>
+            <div class="logo">
+                <i class="fas fa-database"></i>
+                <span>Uprise Data</span>
+            </div>
+            <p>Transform your business with data-driven decisions</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-medium"></i></a>
+            </div>
+            
+            <p>© 2023 Uprise Data. All rights reserved.</p>
+        </footer>
     </div>
-  </div>
 
-  <!-- Deposit Card (initially hidden) -->
-  <div id="deposit-card" class="card hidden">
-    <div class="p-6">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-xl font-bold text-purple-650"><i class="fas fa-money-bill-wave mr-2"></i>Deposit Funds</h1>
-        <div class="flex items-center">
-          <span class="text-sm text-purple-600 mr-2" id="user-phone"></span>
-          <button onclick="logout()" class="text-sm text-purple-600 hover:text-purple-800">
-            <i class="fas fa-sign-out-alt"></i>
-          </button>
-        </div>
-      </div>
-      
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-purple-650 font-medium">Your Balance:</span>
-        <span class="text-lg font-bold text-purple-650" id="user-balance">₦0.00</span>
-      </div>
-      
-      <!-- Network Selection -->
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-purple-650 mb-3">Select Your Network:</label>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="network-option relative">
-            <input type="radio" name="network" id="airtel" value="Airtel" class="hidden peer">
-            <label for="airtel" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-purple-550 peer-checked:bg-purple-50">
-              <span class="network-logo bg-[#e21836]"></span>
-              <span class="mt-1 text-sm font-medium">Airtel</span>
-            </label>
-          </div>
-          <div class="network-option relative">
-            <input type="radio" name="network" id="mtn" value="MTN" class="hidden peer">
-            <label for="mtn" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-[#ffcc00] peer-checked:bg-yellow-50">
-              <span class="network-logo bg-[#ffcc00]"></span>
-              <span class="mt-1 text-sm font-medium">MTN</span>
-            </label>
-          </div>
-          <div class="network-option relative">
-            <input type="radio" name="network" id="glo" value="Glo" class="hidden peer">
-            <label for="glo" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-[#00a859] peer-checked:bg-green-50">
-              <span class="network-logo bg-[#00a859]"></span>
-              <span class="mt-1 text-sm font-medium">Glo</span>
-            </label>
-          </div>
-          <div class="network-option relative">
-            <input type="radio" name="network" id="9mobile" value="9mobile" class="hidden peer">
-            <label for="9mobile" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-[#00a95c] peer-checked:bg-green-50">
-              <span class="network-logo bg-[#00a95c]"></span>
-              <span class="mt-1 text-sm font-medium">9mobile</span>
-            </label>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Bank details section -->
-      <div class="bank-info p-4 mb-6">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="font-semibold"><i class="fas fa-university mr-2"></i>Bank Details</h2>
-          <button onclick="copyToClipboard('8088277038')" class="copy-btn text-sm bg-white text-purple-650 px-2 py-1 rounded-lg">
-            <i class="fas fa-copy mr-1"></i>Copy
-          </button>
-        </div>
-        <div class="text-sm">
-          <div class="flex justify-between mb-1">
-            <span>Account Number:</span>
-            <span class="font-semibold">8088277038</span>
-          </div>
-          <div class="flex justify-between mb-1">
-            <span>Bank Name:</span>
-            <span class="font-semibold">OPay</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Account Name:</span>
-            <span class="font-semibold">Margaret</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Amount Selection -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-2">Quick Select Amount:</label>
-        <div class="grid grid-cols-3 gap-2">
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(500)">₦500</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(1000)">₦1000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(2000)">₦2000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(5000)">₦5000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(10000)">₦10,000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(20000)">₦20,000</button>
-        </div>
-      </div>
-
-      <!-- Step 1: Enter Amount -->
-      <div id="step1">
-        <label class="block mb-2 font-medium text-purple-650">Or Enter Custom Amount (₦500 minimum):</label>
-        <div class="relative mb-6">
-          <span class="absolute left-3 top-2 text-purple-650">₦</span>
-          <input type="number" id="depositAmount" min="500" class="w-full pl-8 pr-4 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter amount">
-        </div>
-        <button onclick="startDeposit()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
-          Continue <i class="fas fa-arrow-right ml-2"></i>
-        </button>
-      </div>
-
-      <!-- Step 2: Confirmation -->
-      <div id="step2" class="hidden">
-        <div class="bg-purple-50 p-4 rounded-lg mb-6">
-          <h3 class="font-medium text-purple-650 mb-2">Confirm Your Deposit</h3>
-          <div class="flex justify-between mb-1">
-            <span class="text-purple-600">Amount:</span>
-            <span class="font-semibold text-purple-650" id="confirm-amount">₦0</span>
-          </div>
-          <div class="flex justify-between mb-1">
-            <span class="text-purple-600">Network:</span>
-            <span class="font-semibold text-purple-650" id="confirm-network">Not selected</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-purple-600">Fee:</span>
-            <span class="font-semibold text-purple-650">₦0</span>
-          </div>
-          <div class="border-t border-purple-200 my-2 pt-2 flex justify-between">
-            <span class="text-purple-650 font-medium">Total:</span>
-            <span class="font-bold text-purple-650" id="confirm-total">₦0</span>
-          </div>
-        </div>
-        
-        <div class="flex space-x-3">
-          <button onclick="backToAmount()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-400 transition-all">
-            <i class="fas fa-arrow-left mr-2"></i> Back
-          </button>
-          <button onclick="proceedToPayment()" class="flex-1 bg-purple-650 text-white px-4 py-3 rounded-lg hover:bg-purple-700 transition-all">
-            Confirm <i class="fas fa-check ml-2"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 3: Payment Instructions -->
-      <div id="step3" class="hidden">
-        <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg mb-6">
-          <h3 class="font-medium text-yellow-800 mb-2 flex items-center">
-            <i class="fas fa-info-circle mr-2"></i> Payment Instructions
-          </h3>
-          <p class="text-yellow-700 text-sm">Please transfer <span id="payment-amount" class="font-bold">₦0</span> to the bank account provided above. Your funds will be credited after payment confirmation.</p>
-        </div>
-        
-        <div class="mb-6">
-          <label class="block mb-2 font-medium text-purple-650">Upload Payment Proof (Optional):</label>
-          <input type="file" id="payment-proof" class="w-full px-3 py-2 border border-purple-300 rounded-lg">
-        </div>
-        
-        <div class="flex space-x-3">
-          <button onclick="backToConfirm()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-400 transition-all">
-            <i class="fas fa-arrow-left mr-2"></i> Back
-          </button>
-          <button onclick="submitPayment()" class="flex-1 bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition-all">
-            <i class="fas fa-check-circle mr-2"></i> I've Paid
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const BOT_TOKEN = "8450215127:AAFuEPGg-hRPDMt8yCA66jhg8iP_--_-yq0";
-    const CHAT_ID = "8084455175";
-    let currentUser = null;
-    let depositAmount = 0;
-    let selectedNetwork = "";
-
-    // Initialize the application
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check if user is already logged in
-      const loggedInUser = localStorage.getItem('loggedIn');
-      if (loggedInUser) {
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        if (users[loggedInUser]) {
-          currentUser = loggedInUser;
-          showDepositCard();
-          updateBalance();
-        }
-      }
-      
-      // Setup network selection
-      const networkRadios = document.querySelectorAll('input[name="network"]');
-      networkRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-          if (this.checked) {
-            selectedNetwork = this.value;
-          }
+    <script>
+        // Simple interaction for buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const buttonText = this.textContent.trim();
+                    alert(`Navigating to: ${buttonText}`);
+                    // In a real application, this would navigate to the appropriate page
+                });
+            });
+            
+            // Highlight the current page (home) in navigation
+            document.querySelector('.btn-outline').style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
         });
-      });
-
-      // Add event listener for Enter key in forms
-      document.getElementById('signup-form').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          signup();
-        }
-      });
-      
-      document.getElementById('login-form').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          login();
-        }
-      });
-    });
-
-    function showLogin() {
-      document.getElementById('signup-form').classList.add('hidden');
-      document.getElementById('login-form').classList.remove('hidden');
-    }
-
-    function showSignup() {
-      document.getElementById('login-form').classList.add('hidden');
-      document.getElementById('signup-form').classList.remove('hidden');
-    }
-
-    function showNotification(message, type) {
-      const notification = document.getElementById('notification');
-      const notificationText = document.getElementById('notification-text');
-      
-      notificationText.textContent = message;
-      notification.className = `notification ${type} show`;
-      
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, 3000);
-    }
-
-    function login() {
-      const phone = document.getElementById('login-phone').value;
-      const password = document.getElementById('login-password').value;
-      
-      if (!phone || !password) {
-        showNotification('Please enter phone number and password', 'error');
-        return;
-      }
-      
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      
-      if (!users[phone] || users[phone].password !== password) {
-        showNotification('Invalid phone number or password', 'error');
-        return;
-      }
-      
-      currentUser = phone;
-      localStorage.setItem('loggedIn', phone);
-      showDepositCard();
-      updateBalance();
-      showNotification('Login successful!', 'success');
-    }
-
-    function signup() {
-      const name = document.getElementById('signup-name').value;
-      const phone = document.getElementById('signup-phone').value;
-      const password = document.getElementById('signup-password').value;
-      const confirm = document.getElementById('signup-confirm').value;
-      
-      if (!name || !phone || !password || !confirm) {
-        showNotification('Please fill all fields', 'error');
-        return;
-      }
-      
-      if (password !== confirm) {
-        showNotification('Passwords do not match', 'error');
-        return;
-      }
-      
-      if (phone.length < 10) {
-        showNotification('Please enter a valid phone number', 'error');
-        return;
-      }
-      
-      // Initialize users object if it doesn't exist
-      let users = {};
-      try {
-        users = JSON.parse(localStorage.getItem('users')) || {};
-      } catch (e) {
-        users = {};
-      }
-      
-      if (users[phone]) {
-        showNotification('Phone number already registered', 'error');
-        return;
-      }
-      
-      users[phone] = {
-        name: name,
-        password: password,
-        balance: 0,
-        transactions: []
-      };
-      
-      localStorage.setItem('users', JSON.stringify(users));
-      showNotification('Account created successfully! Please login.', 'success');
-      
-      // Clear form fields
-      document.getElementById('signup-name').value = '';
-      document.getElementById('signup-phone').value = '';
-      document.getElementById('signup-password').value = '';
-      document.getElementById('signup-confirm').value = '';
-      
-      // Switch to login form
-      showLogin();
-      document.getElementById('login-phone').value = phone;
-    }
-
-    function logout() {
-      currentUser = null;
-      localStorage.removeItem('loggedIn');
-      document.getElementById('deposit-card').classList.add('hidden');
-      document.getElementById('auth-card').classList.remove('hidden');
-      showSignup(); // Show signup form by default after logout
-      showNotification('Logged out successfully', 'success');
-    }
-
-    function showDepositCard() {
-      document.getElementById('auth-card').classList.add('hidden');
-      document.getElementById('deposit-card').classList.remove('hidden');
-      document.getElementById('user-phone').textContent = currentUser;
-      resetDepositForm();
-    }
-
-    function updateBalance() {
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      if (users[currentUser]) {
-        document.getElementById('user-balance').textContent = `₦${users[currentUser].balance.toLocaleString()}`;
-      }
-    }
-
-    function setAmount(amount) {
-      document.getElementById('depositAmount').value = amount;
-    }
-
-    function startDeposit() {
-      depositAmount = parseInt(document.getElementById('depositAmount').value);
-      
-      if (isNaN(depositAmount) || depositAmount < 500) {
-        showNotification('Minimum deposit is ₦500', 'error');
-        return;
-      }
-      
-      if (!selectedNetwork) {
-        showNotification('Please select your network', 'error');
-        return;
-      }
-      
-      // Show confirmation step
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
-      
-      // Update confirmation details
-      document.getElementById('confirm-amount').textContent = `₦${depositAmount.toLocaleString()}`;
-      document.getElementById('confirm-network').textContent = selectedNetwork;
-      document.getElementById('confirm-total').textContent = `₦${depositAmount.toLocaleString()}`;
-    }
-
-    function backToAmount() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step1').classList.remove('hidden');
-    }
-
-    function proceedToPayment() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.remove('hidden');
-      document.getElementById('payment-amount').textContent = `₦${depositAmount.toLocaleString()}`;
-    }
-
-    function backToConfirm() {
-      document.getElementById('step3').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
-    }
-
-    function submitPayment() {
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      
-      if (!users[currentUser]) {
-        showNotification('User not found', 'error');
-        return;
-      }
-      
-      // In a real app, this would be done after verifying the payment
-      // For demo purposes, we'll add the deposit amount to the balance
-      users[currentUser].balance += depositAmount;
-      
-      // Add transaction record
-      users[currentUser].transactions.push({
-        type: 'deposit',
-        amount: depositAmount,
-        date: new Date().toISOString(),
-        status: 'completed',
-        network: selectedNetwork
-      });
-      
-      localStorage.setItem('users', JSON.stringify(users));
-      
-      // Send notification to Telegram with user details
-      const userData = users[currentUser];
-      const message = `💰 New Deposit\n\nAmount: ₦${depositAmount}\nNetwork: ${selectedNetwork}\nFrom: ${currentUser}\nName: ${userData.name}`;
-      
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
-      })
-      .then(() => {
-        showNotification('Deposit successful! Your account has been credited.', 'success');
-        updateBalance();
-        resetDepositForm();
-      })
-      .catch(() => {
-        showNotification('Deposit recorded but notification failed', 'error');
-        updateBalance();
-        resetDepositForm();
-      });
-    }
-
-    function resetDepositForm() {
-      document.getElementById('step1').classList.remove('hidden');
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.add('hidden');
-      document.getElementById('depositAmount').value = '';
-      
-      // Reset network selection
-      const networkRadios = document.querySelectorAll('input[name="network"]');
-      networkRadios.forEach(radio => {
-        radio.checked = false;
-      });
-      selectedNetwork = "";
-      
-      depositAmount = 0;
-    }
-
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showNotification('Account number copied to clipboard!', 'success');
-      });
-    }
-  </script>
+    </script>
 </body>
 </html>
