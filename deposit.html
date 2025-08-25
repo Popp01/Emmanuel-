@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uprise Data | Deposit & Auth</title>
+  <title>Uprise Data | Sign Up</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -42,19 +42,6 @@
       overflow: hidden;
       width: 100%;
       max-width: 420px;
-    }
-    
-    .auth-tab {
-      cursor: pointer;
-      padding: 1rem;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    
-    .auth-tab.active {
-      border-bottom: 3px solid #7e22ce;
-      color: #7e22ce;
-      font-weight: 600;
     }
     
     .bank-info {
@@ -129,6 +116,24 @@
     .notification.error {
       background-color: #ef4444;
     }
+
+    .switch-form {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #e9d5ff;
+    }
+
+    .switch-form a {
+      color: #7e22ce;
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .switch-form a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -140,13 +145,7 @@
 
   <!-- Auth Card -->
   <div id="auth-card" class="card">
-    <!-- Tabs -->
-    <div class="flex border-b">
-      <div class="auth-tab w-1/2" id="signup-tab">Sign Up</div>
-      <div class="auth-tab active w-1/2" id="login-tab">Login</div>
-    </div>
-    
-    <!-- Signup Form (shown first) -->
+    <!-- Signup Form (shown first by default) -->
     <div id="signup-form" class="p-8">
       <h2 class="text-2xl font-bold text-purple-650 mb-6 text-center">Create Account</h2>
       
@@ -178,6 +177,10 @@
       <button onclick="signup()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
         Create Account <i class="fas fa-user-plus ml-2"></i>
       </button>
+
+      <div class="switch-form">
+        <p>Already have an account? <a onclick="showLogin()">Login here</a></p>
+      </div>
     </div>
     
     <!-- Login Form (hidden initially) -->
@@ -202,6 +205,10 @@
       <button onclick="login()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
         Login <i class="fas fa-sign-in-alt ml-2"></i>
       </button>
+
+      <div class="switch-form">
+        <p>Don't have an account? <a onclick="showSignup()">Sign up here</a></p>
+      </div>
     </div>
   </div>
 
@@ -385,10 +392,6 @@
         }
       }
       
-      // Setup tab switching - Sign up first, then login
-      document.getElementById('signup-tab').addEventListener('click', () => switchTab('signup'));
-      document.getElementById('login-tab').addEventListener('click', () => switchTab('login'));
-      
       // Setup network selection
       const networkRadios = document.querySelectorAll('input[name="network"]');
       networkRadios.forEach(radio => {
@@ -413,18 +416,14 @@
       });
     });
 
-    function switchTab(tab) {
-      if (tab === 'signup') {
-        document.getElementById('signup-tab').classList.add('active');
-        document.getElementById('login-tab').classList.remove('active');
-        document.getElementById('signup-form').classList.remove('hidden');
-        document.getElementById('login-form').classList.add('hidden');
-      } else {
-        document.getElementById('login-tab').classList.add('active');
-        document.getElementById('signup-tab').classList.remove('active');
-        document.getElementById('login-form').classList.remove('hidden');
-        document.getElementById('signup-form').classList.add('hidden');
-      }
+    function showLogin() {
+      document.getElementById('signup-form').classList.add('hidden');
+      document.getElementById('login-form').classList.remove('hidden');
+    }
+
+    function showSignup() {
+      document.getElementById('login-form').classList.add('hidden');
+      document.getElementById('signup-form').classList.remove('hidden');
     }
 
     function showNotification(message, type) {
@@ -512,8 +511,8 @@
       document.getElementById('signup-password').value = '';
       document.getElementById('signup-confirm').value = '';
       
-      // Switch to login tab
-      switchTab('login');
+      // Switch to login form
+      showLogin();
       document.getElementById('login-phone').value = phone;
     }
 
@@ -522,6 +521,7 @@
       localStorage.removeItem('loggedIn');
       document.getElementById('deposit-card').classList.add('hidden');
       document.getElementById('auth-card').classList.remove('hidden');
+      showSignup(); // Show signup form by default after logout
       showNotification('Logged out successfully', 'success');
     }
 
