@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uprise Data | Sign Up</title>
+  <title>Uprise Data | Deposit</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -29,10 +29,8 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 50%, #c084fc 100%);
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 1rem;
+      margin: 0;
+      padding: 0;
     }
     
     .card {
@@ -42,53 +40,45 @@
       overflow: hidden;
       width: 100%;
       max-width: 420px;
+      margin: 20px auto;
     }
     
-    .bank-info {
-      background: linear-gradient(to right, #7e22ce, #a855f7);
-      color: white;
-      border-radius: 1rem;
+    .navbar {
+      background: white;
+      border-radius: 0 0 1rem 1rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 420px;
+      z-index: 100;
+    }
+    
+    .nav-item {
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
       transition: all 0.3s ease;
+      flex: 1;
     }
     
-    .bank-info:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px -5px rgba(126, 34, 206, 0.4);
+    .nav-item.active {
+      color: #7e22ce;
+      font-weight: 600;
+      border-bottom: 3px solid #7e22ce;
     }
     
-    .step-transition {
-      transition: all 0.5s ease;
+    .nav-item:hover {
+      background-color: #faf5ff;
     }
     
-    .copy-btn {
-      transition: all 0.2s ease;
-    }
-    
-    .copy-btn:hover {
-      transform: scale(1.05);
-    }
-    
-    .progress-bar {
-      height: 6px;
-      border-radius: 3px;
-      background-color: #e9d5ff;
-      overflow: hidden;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: linear-gradient(to right, #7e22ce, #a855f7);
-      width: 0%;
-      transition: width 2s linear;
-    }
-    
-    .amount-btn {
-      transition: all 0.2s ease;
-    }
-    
-    .amount-btn:hover {
-      transform: translateY(-2px);
+    .page {
+      padding: 80px 20px 20px;
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 100vh;
     }
     
     .notification {
@@ -116,23 +106,25 @@
     .notification.error {
       background-color: #ef4444;
     }
-
-    .switch-form {
-      text-align: center;
-      margin-top: 20px;
-      padding-top: 15px;
-      border-top: 1px solid #e9d5ff;
+    
+    .account-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
     }
-
-    .switch-form a {
-      color: #7e22ce;
-      text-decoration: none;
-      font-weight: 500;
+    
+    .account-details.show {
+      max-height: 500px;
+    }
+    
+    .copy-btn {
       cursor: pointer;
+      transition: all 0.3s ease;
     }
-
-    .switch-form a:hover {
-      text-decoration: underline;
+    
+    .copy-btn:hover {
+      transform: scale(1.05);
+      color: #7e22ce;
     }
   </style>
 </head>
@@ -143,287 +135,191 @@
     <span id="notification-text"></span>
   </div>
 
-  <!-- Auth Card -->
-  <div id="auth-card" class="card">
-    <!-- Signup Form (shown first by default) -->
-    <div id="signup-form" class="p-8">
-      <h2 class="text-2xl font-bold text-purple-650 mb-6 text-center">Create Account</h2>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Full Name</label>
-        <input type="text" id="signup-name" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter your full name">
-      </div>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Phone Number</label>
-        <div class="flex">
-          <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-purple-300 bg-purple-100 text-purple-700 text-sm">
-            +234
-          </span>
-          <input type="tel" id="signup-phone" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border-purple-300 border focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="8012345678">
-        </div>
-      </div>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Password</label>
-        <input type="password" id="signup-password" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Create a password">
-      </div>
-      
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Confirm Password</label>
-        <input type="password" id="signup-confirm" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Confirm your password">
-      </div>
-      
-      <button onclick="signup()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
-        Create Account <i class="fas fa-user-plus ml-2"></i>
-      </button>
-
-      <div class="switch-form">
-        <p>Already have an account? <a onclick="showLogin()">Login here</a></p>
-      </div>
+  <!-- Navigation Bar -->
+  <div class="navbar flex justify-around items-center">
+    <div class="nav-item" onclick="window.location.href='index.html'">
+      <i class="fas fa-home"></i>
+      <span class="hidden md:inline ml-1">Home</span>
     </div>
-    
-    <!-- Login Form (hidden initially) -->
-    <div id="login-form" class="p-8 hidden">
-      <h2 class="text-2xl font-bold text-purple-650 mb-6 text-center">Welcome Back</h2>
-      
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Phone Number</label>
-        <div class="flex">
-          <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-purple-300 bg-purple-100 text-purple-700 text-sm">
-            +234
-          </span>
-          <input type="tel" id="login-phone" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border-purple-300 border focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="8012345678">
-        </div>
-      </div>
-      
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-purple-650 mb-1">Password</label>
-        <input type="password" id="login-password" class="w-full px-3 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter your password">
-      </div>
-      
-      <button onclick="login()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
-        Login <i class="fas fa-sign-in-alt ml-2"></i>
-      </button>
-
-      <div class="switch-form">
-        <p>Don't have an account? <a onclick="showSignup()">Sign up here</a></p>
-      </div>
+    <div class="nav-item" onclick="window.location.href='buy.html'">
+      <i class="fas fa-wifi"></i>
+      <span class="hidden md:inline ml-1">Buy Data</span>
+    </div>
+    <div class="nav-item active">
+      <i class="fas fa-money-bill-wave"></i>
+      <span class="hidden md:inline ml-1">Deposit</span>
+    </div>
+    <div class="nav-item" onclick="window.location.href='account.html'">
+      <i class="fas fa-user"></i>
+      <span class="hidden md:inline ml-1">Account</span>
     </div>
   </div>
 
-  <!-- Deposit Card (initially hidden) -->
-  <div id="deposit-card" class="card hidden">
-    <div class="p-6">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-xl font-bold text-purple-650"><i class="fas fa-money-bill-wave mr-2"></i>Deposit Funds</h1>
-        <div class="flex items-center">
-          <span class="text-sm text-purple-600 mr-2" id="user-phone"></span>
-          <button onclick="logout()" class="text-sm text-purple-600 hover:text-purple-800">
-            <i class="fas fa-sign-out-alt"></i>
-          </button>
-        </div>
-      </div>
-      
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-purple-650 font-medium">Your Balance:</span>
-        <span class="text-lg font-bold text-purple-650" id="user-balance">₦0.00</span>
-      </div>
-      
-      <!-- Network Selection -->
-      <div class="mb-6">
-        <label class="block text-sm font-medium text-purple-650 mb-3">Select Your Network:</label>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="network-option relative">
-            <input type="radio" name="network" id="airtel" value="Airtel" class="hidden peer">
-            <label for="airtel" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-purple-550 peer-checked:bg-purple-50">
-              <span class="network-logo bg-[#e21836]"></span>
-              <span class="mt-1 text-sm font-medium">Airtel</span>
-            </label>
-          </div>
-          <div class="network-option relative">
-            <input type="radio" name="network" id="mtn" value="MTN" class="hidden peer">
-            <label for="mtn" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-[#ffcc00] peer-checked:bg-yellow-50">
-              <span class="network-logo bg-[#ffcc00]"></span>
-              <span class="mt-1 text-sm font-medium">MTN</span>
-            </label>
-          </div>
-          <div class="network-option relative">
-            <input type="radio" name="network" id="glo" value="Glo" class="hidden peer">
-            <label for="glo" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-[#00a859] peer-checked:bg-green-50">
-              <span class="network-logo bg-[#00a859]"></span>
-              <span class="mt-1 text-sm font-medium">Glo</span>
-            </label>
-          </div>
-          <div class="network-option relative">
-            <input type="radio" name="network" id="9mobile" value="9mobile" class="hidden peer">
-            <label for="9mobile" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-[#00a95c] peer-checked:bg-green-50">
-              <span class="network-logo bg-[#00a95c]"></span>
-              <span class="mt-1 text-sm font-medium">9mobile</span>
-            </label>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Bank details section -->
-      <div class="bank-info p-4 mb-6">
-        <div class="flex justify-between items-center mb-3">
-          <h2 class="font-semibold"><i class="fas fa-university mr-2"></i>Bank Details</h2>
-          <button onclick="copyToClipboard('8088277038')" class="copy-btn text-sm bg-white text-purple-650 px-2 py-1 rounded-lg">
-            <i class="fas fa-copy mr-1"></i>Copy
-          </button>
-        </div>
-        <div class="text-sm">
-          <div class="flex justify-between mb-1">
-            <span>Account Number:</span>
-            <span class="font-semibold">8088277038</span>
-          </div>
-          <div class="flex justify-between mb-1">
-            <span>Bank Name:</span>
-            <span class="font-semibold">OPay</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Account Name:</span>
-            <span class="font-semibold">Margaret</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Quick Amount Selection -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-purple-650 mb-2">Quick Select Amount:</label>
-        <div class="grid grid-cols-3 gap-2">
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(500)">₦500</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(1000)">₦1000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(2000)">₦2000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(5000)">₦5000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(10000)">₦10,000</button>
-          <button class="amount-btn bg-purple-100 text-purple-650 py-2 rounded-lg hover:bg-purple-200" onclick="setAmount(20000)">₦20,000</button>
-        </div>
-      </div>
-
-      <!-- Step 1: Enter Amount -->
-      <div id="step1">
-        <label class="block mb-2 font-medium text-purple-650">Or Enter Custom Amount (₦500 minimum):</label>
-        <div class="relative mb-6">
-          <span class="absolute left-3 top-2 text-purple-650">₦</span>
-          <input type="number" id="depositAmount" min="500" class="w-full pl-8 pr-4 py-2 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter amount">
-        </div>
-        <button onclick="startDeposit()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/50">
-          Continue <i class="fas fa-arrow-right ml-2"></i>
-        </button>
-      </div>
-
-      <!-- Step 2: Confirmation -->
-      <div id="step2" class="hidden">
-        <div class="bg-purple-50 p-4 rounded-lg mb-6">
-          <h3 class="font-medium text-purple-650 mb-2">Confirm Your Deposit</h3>
-          <div class="flex justify-between mb-1">
-            <span class="text-purple-600">Amount:</span>
-            <span class="font-semibold text-purple-650" id="confirm-amount">₦0</span>
-          </div>
-          <div class="flex justify-between mb-1">
-            <span class="text-purple-600">Network:</span>
-            <span class="font-semibold text-purple-650" id="confirm-network">Not selected</span>
-          </div>
-          <div class="flex justify-between">
-            <span class="text-purple-600">Fee:</span>
-            <span class="font-semibold text-purple-650">₦0</span>
-          </div>
-          <div class="border-t border-purple-200 my-2 pt-2 flex justify-between">
-            <span class="text-purple-650 font-medium">Total:</span>
-            <span class="font-bold text-purple-650" id="confirm-total">₦0</span>
-          </div>
-        </div>
+  <!-- Deposit Page Content -->
+  <div class="page">
+    <div class="card">
+      <div class="p-6">
+        <h1 class="text-xl font-bold text-purple-650 mb-6 text-center"><i class="fas fa-money-bill-wave mr-2"></i>Deposit Funds</h1>
         
-        <div class="flex space-x-3">
-          <button onclick="backToAmount()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-400 transition-all">
-            <i class="fas fa-arrow-left mr-2"></i> Back
-          </button>
-          <button onclick="proceedToPayment()" class="flex-1 bg-purple-650 text-white px-4 py-3 rounded-lg hover:bg-purple-700 transition-all">
-            Confirm <i class="fas fa-check ml-2"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Step 3: Payment Instructions -->
-      <div id="step3" class="hidden">
-        <div class="bg-yellow-50 border border-yellow-200 p-4 rounded-lg mb-6">
-          <h3 class="font-medium text-yellow-800 mb-2 flex items-center">
-            <i class="fas fa-info-circle mr-2"></i> Payment Instructions
-          </h3>
-          <p class="text-yellow-700 text-sm">Please transfer <span id="payment-amount" class="font-bold">₦0</span> to the bank account provided above. Your funds will be credited after payment confirmation.</p>
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-purple-650 mb-3">Select Deposit Method:</label>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="method-option relative">
+              <input type="radio" name="deposit-method" id="method-bank" value="bank" class="hidden peer" checked>
+              <label for="method-bank" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-purple-550 peer-checked:bg-purple-50 transition-all duration-300">
+                <i class="fas fa-building text-purple-650 text-xl mb-1"></i>
+                <span class="mt-1 text-sm font-medium">Bank Transfer</span>
+              </label>
+            </div>
+            <div class="method-option relative">
+              <input type="radio" name="deposit-method" id="method-crypto" value="crypto" class="hidden peer">
+              <label for="method-crypto" class="flex flex-col items-center justify-center p-3 border-2 border-purple-200 rounded-lg cursor-pointer peer-checked:border-purple-550 peer-checked:bg-purple-50 transition-all duration-300">
+                <i class="fab fa-bitcoin text-purple-650 text-xl mb-1"></i>
+                <span class="mt-1 text-sm font-medium">Crypto</span>
+              </label>
+            </div>
+          </div>
         </div>
         
         <div class="mb-6">
-          <label class="block mb-2 font-medium text-purple-650">Upload Payment Proof (Optional):</label>
-          <input type="file" id="payment-proof" class="w-full px-3 py-2 border border-purple-300 rounded-lg">
+          <label class="block text-sm font-medium text-purple-650 mb-1">Amount to Deposit (₦):</label>
+          <input type="number" id="deposit-amount" class="w-full px-3 py-2 border border-purple-300 rounded-md focus:ring-2 focus:ring-purple-350 focus:border-purple-350" placeholder="Enter amount" min="100">
         </div>
         
-        <div class="flex space-x-3">
-          <button onclick="backToConfirm()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-400 transition-all">
-            <i class="fas fa-arrow-left mr-2"></i> Back
-          </button>
-          <button onclick="submitPayment()" class="flex-1 bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition-all">
-            <i class="fas fa-check-circle mr-2"></i> I've Paid
-          </button>
+        <button id="continue-btn" onclick="showAccountDetails()" class="bg-purple-650 text-white px-4 py-3 rounded-lg w-full hover:bg-purple-700 transition-all duration-300 shadow-lg shadow-purple-350/40 hover:shadow-purple-450/40 mb-6">
+          Continue
+        </button>
+        
+        <!-- Account Details (Hidden by default) -->
+        <div id="account-details" class="account-details">
+          <div class="border-t border-purple-200 pt-4 mb-4"></div>
+          
+          <h2 class="text-lg font-bold text-purple-650 mb-4 text-center">Bank Transfer Details</h2>
+          
+          <div class="bg-purple-50 p-4 rounded-lg mb-4">
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-medium text-purple-650">Bank Name:</span>
+              <div class="flex items-center">
+                <span id="bank-name" class="font-bold">OPAY</span>
+                <i class="fas fa-copy copy-btn ml-2 text-purple-550" onclick="copyToClipboard('bank-name')"></i>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-medium text-purple-650">Account Number:</span>
+              <div class="flex items-center">
+                <span id="account-number" class="font-bold">8088277038</span>
+                <i class="fas fa-copy copy-btn ml-2 text-purple-550" onclick="copyToClipboard('account-number')"></i>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-medium text-purple-650">Account Name:</span>
+              <div class="flex items-center">
+                <span id="account-name" class="font-bold">MARGARET</span>
+                <i class="fas fa-copy copy-btn ml-2 text-purple-550" onclick="copyToClipboard('account-name')"></i>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <i class="fas fa-exclamation-circle text-yellow-500"></i>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm text-yellow-700">
+                  <strong>Important:</strong> Use your registered name as reference when transferring. Funds will be credited within 5 minutes after transfer.
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex space-x-3">
+            <button onclick="markAsPaid()" class="bg-green-600 text-white px-4 py-2 rounded-lg flex-1 hover:bg-green-700 transition-all duration-300">
+              <i class="fas fa-check-circle mr-2"></i> I Have Paid
+            </button>
+            <button onclick="hideAccountDetails()" class="bg-gray-500 text-white px-4 py-2 rounded-lg flex-1 hover:bg-gray-600 transition-all duration-300">
+              <i class="fas fa-times mr-2"></i> Cancel
+            </button>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <p class="text-sm text-purple-600">Need help? <a href="#" class="text-purple-650 font-semibold">Contact support</a></p>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    const BOT_TOKEN = "8450215127:AAFuEPGg-hRPDMt8yCA66jhg8iP_--_-yq0";
-    const CHAT_ID = "8084455175";
-    let currentUser = null;
-    let depositAmount = 0;
-    let selectedNetwork = "";
-
     // Initialize the application
     document.addEventListener('DOMContentLoaded', function() {
-      // Check if user is already logged in
-      const loggedInUser = localStorage.getItem('loggedIn');
-      if (loggedInUser) {
-        const users = JSON.parse(localStorage.getItem('users') || '{}');
-        if (users[loggedInUser]) {
-          currentUser = loggedInUser;
-          showDepositCard();
-          updateBalance();
-        }
-      }
-      
-      // Setup network selection
-      const networkRadios = document.querySelectorAll('input[name="network"]');
-      networkRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
-          if (this.checked) {
-            selectedNetwork = this.value;
-          }
-        });
-      });
-
-      // Add event listener for Enter key in forms
-      document.getElementById('signup-form').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          signup();
-        }
-      });
-      
-      document.getElementById('login-form').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          login();
+      // Add input validation for the amount field
+      const amountInput = document.getElementById('deposit-amount');
+      amountInput.addEventListener('input', function() {
+        if (this.value < 500) {
+          this.setCustomValidity('Minimum deposit is ₦500');
+        } else {
+          this.setCustomValidity('');
         }
       });
     });
 
-    function showLogin() {
-      document.getElementById('signup-form').classList.add('hidden');
-      document.getElementById('login-form').classList.remove('hidden');
+    function showAccountDetails() {
+      const amount = document.getElementById('deposit-amount').value;
+      const method = document.querySelector('input[name="deposit-method"]:checked').value;
+      
+      // Validate amount
+      if (!amount || amount < 500) {
+        showNotification('Please enter a valid amount (minimum ₦500)', 'error');
+        return;
+      }
+      
+      // Show account details with animation
+      const accountDetails = document.getElementById('account-details');
+      accountDetails.classList.add('show');
+      
+      // Scroll to account details
+      accountDetails.scrollIntoView({ behavior: 'smooth' });
+      
+      // Change button text
+      document.getElementById('continue-btn').textContent = 'Change Amount';
+      document.getElementById('continue-btn').onclick = hideAccountDetails;
+      
+      showNotification(`Please transfer exactly ₦${amount} to the account details below`, 'success');
+    }
+    
+    function hideAccountDetails() {
+      const accountDetails = document.getElementById('account-details');
+      accountDetails.classList.remove('show');
+      
+      // Reset button
+      document.getElementById('continue-btn').textContent = 'Continue';
+      document.getElementById('continue-btn').onclick = showAccountDetails;
     }
 
-    function showSignup() {
-      document.getElementById('login-form').classList.add('hidden');
-      document.getElementById('signup-form').classList.remove('hidden');
+    function copyToClipboard(elementId) {
+      const element = document.getElementById(elementId);
+      const text = element.textContent;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        showNotification('Copied to clipboard!', 'success');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        showNotification('Failed to copy to clipboard', 'error');
+      });
+    }
+    
+    function markAsPaid() {
+      const amount = document.getElementById('deposit-amount').value;
+      showNotification(`Your deposit of ₦${amount} is being processed. It will be credited within 15 minutes.`, 'success');
+      
+      // Reset form after 2 seconds
+      setTimeout(() => {
+        hideAccountDetails();
+        document.getElementById('deposit-amount').value = '';
+      }, 2000);
     }
 
     function showNotification(message, type) {
@@ -436,216 +332,6 @@
       setTimeout(() => {
         notification.classList.remove('show');
       }, 3000);
-    }
-
-    function login() {
-      const phone = document.getElementById('login-phone').value;
-      const password = document.getElementById('login-password').value;
-      
-      if (!phone || !password) {
-        showNotification('Please enter phone number and password', 'error');
-        return;
-      }
-      
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      
-      if (!users[phone] || users[phone].password !== password) {
-        showNotification('Invalid phone number or password', 'error');
-        return;
-      }
-      
-      currentUser = phone;
-      localStorage.setItem('loggedIn', phone);
-      showDepositCard();
-      updateBalance();
-      showNotification('Login successful!', 'success');
-    }
-
-    function signup() {
-      const name = document.getElementById('signup-name').value;
-      const phone = document.getElementById('signup-phone').value;
-      const password = document.getElementById('signup-password').value;
-      const confirm = document.getElementById('signup-confirm').value;
-      
-      if (!name || !phone || !password || !confirm) {
-        showNotification('Please fill all fields', 'error');
-        return;
-      }
-      
-      if (password !== confirm) {
-        showNotification('Passwords do not match', 'error');
-        return;
-      }
-      
-      if (phone.length < 10) {
-        showNotification('Please enter a valid phone number', 'error');
-        return;
-      }
-      
-      // Initialize users object if it doesn't exist
-      let users = {};
-      try {
-        users = JSON.parse(localStorage.getItem('users')) || {};
-      } catch (e) {
-        users = {};
-      }
-      
-      if (users[phone]) {
-        showNotification('Phone number already registered', 'error');
-        return;
-      }
-      
-      users[phone] = {
-        name: name,
-        password: password,
-        balance: 0,
-        transactions: []
-      };
-      
-      localStorage.setItem('users', JSON.stringify(users));
-      showNotification('Account created successfully! Please login.', 'success');
-      
-      // Clear form fields
-      document.getElementById('signup-name').value = '';
-      document.getElementById('signup-phone').value = '';
-      document.getElementById('signup-password').value = '';
-      document.getElementById('signup-confirm').value = '';
-      
-      // Switch to login form
-      showLogin();
-      document.getElementById('login-phone').value = phone;
-    }
-
-    function logout() {
-      currentUser = null;
-      localStorage.removeItem('loggedIn');
-      document.getElementById('deposit-card').classList.add('hidden');
-      document.getElementById('auth-card').classList.remove('hidden');
-      showSignup(); // Show signup form by default after logout
-      showNotification('Logged out successfully', 'success');
-    }
-
-    function showDepositCard() {
-      document.getElementById('auth-card').classList.add('hidden');
-      document.getElementById('deposit-card').classList.remove('hidden');
-      document.getElementById('user-phone').textContent = currentUser;
-      resetDepositForm();
-    }
-
-    function updateBalance() {
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      if (users[currentUser]) {
-        document.getElementById('user-balance').textContent = `₦${users[currentUser].balance.toLocaleString()}`;
-      }
-    }
-
-    function setAmount(amount) {
-      document.getElementById('depositAmount').value = amount;
-    }
-
-    function startDeposit() {
-      depositAmount = parseInt(document.getElementById('depositAmount').value);
-      
-      if (isNaN(depositAmount) || depositAmount < 500) {
-        showNotification('Minimum deposit is ₦500', 'error');
-        return;
-      }
-      
-      if (!selectedNetwork) {
-        showNotification('Please select your network', 'error');
-        return;
-      }
-      
-      // Show confirmation step
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
-      
-      // Update confirmation details
-      document.getElementById('confirm-amount').textContent = `₦${depositAmount.toLocaleString()}`;
-      document.getElementById('confirm-network').textContent = selectedNetwork;
-      document.getElementById('confirm-total').textContent = `₦${depositAmount.toLocaleString()}`;
-    }
-
-    function backToAmount() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step1').classList.remove('hidden');
-    }
-
-    function proceedToPayment() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.remove('hidden');
-      document.getElementById('payment-amount').textContent = `₦${depositAmount.toLocaleString()}`;
-    }
-
-    function backToConfirm() {
-      document.getElementById('step3').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
-    }
-
-    function submitPayment() {
-      const users = JSON.parse(localStorage.getItem('users') || '{}');
-      
-      if (!users[currentUser]) {
-        showNotification('User not found', 'error');
-        return;
-      }
-      
-      // In a real app, this would be done after verifying the payment
-      // For demo purposes, we'll add the deposit amount to the balance
-      users[currentUser].balance += depositAmount;
-      
-      // Add transaction record
-      users[currentUser].transactions.push({
-        type: 'deposit',
-        amount: depositAmount,
-        date: new Date().toISOString(),
-        status: 'completed',
-        network: selectedNetwork
-      });
-      
-      localStorage.setItem('users', JSON.stringify(users));
-      
-      // Send notification to Telegram with user details
-      const userData = users[currentUser];
-      const message = `💰 New Deposit\n\nAmount: ₦${depositAmount}\nNetwork: ${selectedNetwork}\nFrom: ${currentUser}\nName: ${userData.name}`;
-      
-      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: message })
-      })
-      .then(() => {
-        showNotification('Deposit successful! Your account has been credited.', 'success');
-        updateBalance();
-        resetDepositForm();
-      })
-      .catch(() => {
-        showNotification('Deposit recorded but notification failed', 'error');
-        updateBalance();
-        resetDepositForm();
-      });
-    }
-
-    function resetDepositForm() {
-      document.getElementById('step1').classList.remove('hidden');
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.add('hidden');
-      document.getElementById('depositAmount').value = '';
-      
-      // Reset network selection
-      const networkRadios = document.querySelectorAll('input[name="network"]');
-      networkRadios.forEach(radio => {
-        radio.checked = false;
-      });
-      selectedNetwork = "";
-      
-      depositAmount = 0;
-    }
-
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showNotification('Account number copied to clipboard!', 'success');
-      });
     }
   </script>
 </body>
